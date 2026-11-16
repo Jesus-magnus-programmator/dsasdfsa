@@ -104,19 +104,19 @@ WHAT'S NEW IN VERSION 49
 - A tap that can't be saved shakes the button and says why.
 - A new step button can't be tapped for the first 0.7 seconds (it looks slightly faded), so a double
   tap can't record two steps.
-- Each step button has its own color and icon.
-- The step guide sits inside the step button: the part of the day (At the yard, Load cycle, End of
-  day), the load number, "Step X of Y", the steps already done and the next step pulsing.
-  (To put the guide back above the button, set STEP_MERGED=false in index.html.)
-- A small truck rides along the step guide and shows what is happening: driving to the pit, braking
-  on arrival, being loaded, hauling full, dumping, and driving back empty for the next load.
-- The truck is drawn from the day's equipment and its color: dump truck (with or without a pup),
-  tractor with one or two trailers. Side dumps roll, belly dumps open their gates, end dumps, pups
-  and dump truck beds tip up. "Other" trailers are drawn as a dump trailer.
+- The driving steps (Arrive at loading site, Start loading, Depart with load, Arrived at unloading
+  site, Load delivered) each have their own button color and icon. The yard and end-of-day steps are
+  plain buttons.
 - A tractor must pull at least one trailer: at the start of the day, when changing truck or trailer,
   and in the post-trip setup. The first trailer can no longer be "None" behind a tractor.
-- TESTING: an "Add 4 test photos" button is in the pre-trip and post-trip. Set TEST_PRE=false in
-  index.html before real use.
+- After an early signature, the driver enters the odometer from the final delivery (a box on the
+  Today screen, like the pre-trip odometer) before Return to yard. It is the end odometer on the
+  timesheet, and the comments say it was entered after the early signature.
+- Editing a truck or trailer (for example its color) during a trip no longer mixes up the trip's
+  equipment.
+- Bottom bar and Projects / Equipment / Materials: the highlight slides to the chosen button and each
+  icon has its own animation (truck drives, layers stack, page is written, pump fills, clock hands go
+  round, dirt pours on the pile, clipboard gets a check mark).
 
 WHAT'S NEW IN VERSION 48
 ------------------------

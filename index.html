@@ -485,6 +485,93 @@ label.ph{background:var(--tint);border:1px solid transparent;border-radius:12px;
 .big.mrg .mtk svg{filter:drop-shadow(0 0 1.2px #fff) drop-shadow(0 0 1.2px #fff) drop-shadow(0 2px 2px rgba(0,0,0,.25))}
 .big.mrg .tkbed{fill:#ffcf4a;stroke:#6b3d00}
 .mtk:not(.m-load) .mtd,.mtk:not(.m-dump) .mtp{display:none}
+
+.mtk{height:28px}
+.stln,.big.mrg .stln{height:30px;margin:0}
+#dock .big.mrg{padding:6px 12px 9px!important;border-radius:22px}
+#dock .big.mrg .bl{font-size:17px;margin-top:3px}
+#dock .big.mrg .sti{width:20px;height:20px}
+.big.mrg .sts{gap:1px}
+.big.mrg .sts i{width:19px;height:19px;border-width:1.5px}
+.big.mrg .sts i svg{width:11px;height:11px}
+.big.mrg .sts small{font-size:9.5px;line-height:1.1}
+.big.mrg .stl{margin-top:9px}
+.big.mrg .sts.nw i{animation-name:stpulw2}
+@keyframes stpulw2{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}50%{box-shadow:0 0 0 4px rgba(255,255,255,0)}}
+
+.stln.tkcard{height:52px;margin:4px 0 8px}
+.stln.tkcard .mtk{height:44px}
+.stln.tkcard .strd{opacity:.3}
+
+.haul2 .stg{background:none;border:0;box-shadow:none;padding:0;margin:0 0 10px}
+.haul2 .stln.tkcard{margin-bottom:2px}
+.haul2 .sts small{text-transform:none;letter-spacing:0;font-size:10.5px;margin:0;display:block}
+
+.haspill{position:relative}
+.pill{position:absolute;left:0;top:0;background:var(--hi);border-radius:27px;z-index:0;pointer-events:none;transition:transform .42s cubic-bezier(.3,1.25,.45,1),width .42s cubic-bezier(.3,1.25,.45,1),height .3s}
+.segs .pill{border-radius:12px}
+.haspill>button{position:relative;z-index:1;transition:color .25s}
+.haspill>button.on{background:transparent!important}
+.haspill>button svg{transition:transform .15s}
+.haspill>button:active svg{transform:scale(.86)}
+.haspill>button.pop svg{animation:popi .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes popi{0%{transform:scale(.6) rotate(-8deg)}55%{transform:scale(1.18) rotate(4deg)}100%{transform:none}}
+@media (prefers-reduced-motion:reduce){.pill{transition:none}.haspill>button.pop svg{animation:none}}
+
+.pill.land{animation:pland .6s ease-out}
+@keyframes pland{0%{box-shadow:0 0 0 0 rgba(166,255,0,.65)}100%{box-shadow:0 0 0 10px rgba(166,255,0,0)}}
+.haspill>button.pop svg,.haspill>button.pop svg *{transform-box:fill-box}
+/* Hauling / Other work: the label bounces */
+.segs.mode .seg.pop{animation:aWord .55s cubic-bezier(.3,1.6,.5,1)}
+@keyframes aWord{0%{transform:scale(.85)}55%{transform:scale(1.08)}100%{transform:none}}
+@media (prefers-reduced-motion:reduce){.haspill>button.pop svg,.haspill>button.pop svg *,.segs.mode .seg.pop,.pill.land{animation:none!important}}
+
+.haspill>button svg{overflow:visible}
+.fx{pointer-events:none}
+/* Today and Equipment: the truck drives off, comes back in from the left with speed lines and dust */
+.haspill>button[data-a="t_today"].pop svg,.haspill>button[data-a="equipment"].pop svg{animation:fxDrive 1.7s ease-in-out}
+@keyframes fxDrive{0%{transform:none}30%{transform:translateX(16px);opacity:0}31%{transform:translateX(-16px);opacity:0}45%{opacity:1}75%{transform:translateX(1px)}88%{transform:translateX(-.3px)}100%{transform:none}}
+.fxspd path{stroke:currentColor;stroke-width:1.5;stroke-linecap:round;fill:none;opacity:0;animation:fxSpd 1s ease-out .55s}
+@keyframes fxSpd{0%{opacity:0;transform:translateX(3px)}35%{opacity:.9}100%{opacity:0;transform:translateX(-4px)}}
+.fxdust circle{fill:currentColor;stroke:none;opacity:0;animation:fxDust .8s ease-out 1.1s}
+@keyframes fxDust{0%{opacity:.7;transform:scale(.4)}100%{opacity:0;transform:translate(-3px,-2px) scale(1.6)}}
+/* Projects: the layers drop in and stack */
+.haspill>button[data-a="t_proj"].pop svg{animation:none}
+.haspill>button[data-a="t_proj"].pop svg path{animation:aStack .6s cubic-bezier(.3,1.5,.5,1) both}
+.haspill>button[data-a="t_proj"].pop svg path:nth-child(2){animation-delay:.1s}.haspill>button[data-a="t_proj"].pop svg path:nth-child(3){animation-delay:.2s}
+@keyframes aStack{0%{transform:translateY(-9px);opacity:0}100%{transform:none;opacity:1}}
+/* Documents: the page slides out of the stack and its lines are written */
+.haspill>button[data-a="t_rec"].pop svg{animation:none}
+.haspill>button[data-a="t_rec"].pop svg path:nth-child(1),.haspill>button[data-a="t_rec"].pop svg path:nth-child(2){animation:fxPage .5s cubic-bezier(.3,1.4,.5,1)}
+.haspill>button[data-a="t_rec"].pop svg path:nth-child(4){stroke-dasharray:6;animation:fxWrite .5s ease-out .35s both}
+@keyframes fxPage{0%{transform:translate(-3px,4px);opacity:.2}100%{transform:none;opacity:1}}
+@keyframes fxWrite{from{stroke-dashoffset:6}to{stroke-dashoffset:0}}
+/* Fuel: fuel drips from the nozzle and the pump fills up */
+.haspill>button[data-a="t_fuel"].pop svg{animation:none}
+.fxfill{fill:currentColor;stroke:none;opacity:.4;transform-box:fill-box;transform-origin:50% 100%;animation:fxFill 1.1s ease-out forwards}
+@keyframes fxFill{0%{transform:scaleY(0)}75%{transform:scaleY(1);opacity:.4}100%{transform:scaleY(1);opacity:0}}
+.fxdrop{fill:currentColor;stroke:none;opacity:0;animation:fxDrop .45s ease-in}
+.fxdrop.d2{animation-delay:.18s}.fxdrop.d3{animation-delay:.36s}
+@keyframes fxDrop{0%{opacity:1;transform:translateY(0) scale(.6)}100%{opacity:0;transform:translateY(7px) scale(1)}}
+/* Hours: the clock hands go round */
+.haspill>button[data-a="t_hrs"].pop svg{animation:none}
+.haspill>button[data-a="t_hrs"].pop svg path{transform-box:view-box;transform-origin:12px 12px;animation:fxHands 1.6s ease-in-out}
+.haspill>button[data-a="t_hrs"].pop svg circle{animation:fxTick 1.6s ease-out}
+@keyframes fxHands{from{transform:rotate(-360deg)}to{transform:none}}
+@keyframes fxTick{0%,85%{transform:none}90%{transform:scale(1.08)}100%{transform:none}}
+/* Projects switcher: the clipboard lines are written and a check mark is ticked */
+.haspill>button[data-a="projects"].pop svg{animation:none}
+.haspill>button[data-a="projects"].pop svg path:nth-child(3){stroke-dasharray:6;animation:fxWrite .45s ease-out .1s both}
+.fxchk{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:8;animation:fxChk 1.2s ease-out forwards}
+@keyframes fxChk{0%,40%{stroke-dashoffset:8;opacity:1}65%{stroke-dashoffset:0;opacity:1}85%{opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+/* Materials: dirt pours onto the pile and it grows */
+.haspill>button[data-a="materials"].pop svg{animation:none}
+.haspill>button[data-a="materials"].pop svg path{transform-box:fill-box;transform-origin:50% 100%;animation:fxPile .9s cubic-bezier(.3,1.4,.5,1)}
+@keyframes fxPile{0%,20%{transform:scaleY(.35)}100%{transform:none}}
+.fxdirt circle{fill:currentColor;stroke:none;opacity:0;animation:fxDirt .55s ease-in}
+.fxdirt circle:nth-child(2){animation-delay:.12s}.fxdirt circle:nth-child(3){animation-delay:.24s}.fxdirt circle:nth-child(4){animation-delay:.36s}
+@keyframes fxDirt{0%{opacity:1;transform:none}100%{opacity:0;transform:translateY(12px)}}
+@media (prefers-reduced-motion:reduce){.haspill>button.pop svg,.haspill>button.pop svg *{animation:none!important}.fx{display:none}}
 </style></head><body>
 <div id="bars"><div id="dock"></div><nav><button id="t_today" onclick="tab('today')" aria-label="Today" title="Today"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 9.2l9.3-2.6 1.6 7.4H3.4z"/><path d="M13.4 9.5h3.9l3.2 3.6V16h-7.1z"/><path d="M3 16h17.5"/><circle cx="6.5" cy="17.8" r="1.9"/><circle cx="17.3" cy="17.8" r="1.9"/></svg></button><button id="t_proj" onclick="tab('proj')" aria-label="Projects" title="Projects"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l8.5 4.5L12 12.5 3.5 8z"/><path d="M3.5 12.2l8.5 4.5 8.5-4.5"/><path d="M3.5 16.4l8.5 4.5 8.5-4.5"/></svg></button><button id="t_rec" onclick="tab('rec')" aria-label="Documents" title="Documents"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6.5l3.5 3.5V17H9z"/><path d="M15.5 3v3.5H19"/><path d="M6 7v14h10"/><path d="M11.5 10.5h5M11.5 13.5h5"/></svg></button><button id="t_fuel" onclick="tab('fuel')" aria-label="Fuel consumption" title="Fuel consumption"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V5a1.5 1.5 0 0 1 1.5-1.5h6A1.5 1.5 0 0 1 14 5v15"/><path d="M4 20h11"/><path d="M7 8h5"/><path d="M14 9h2.5a1.5 1.5 0 0 1 1.5 1.5V16a1.5 1.5 0 0 0 3 0V9l-2.5-2.5"/></svg></button><button id="t_hrs" onclick="tab('hrs')" aria-label="Hours worked" title="Hours worked"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></button></nav></div><div id="sheet"></div>
 <main id="app"></main><div id="toast" role="alert"></div><div id="dlg"></div><div id="evp"></div><div id="pv" role="dialog" aria-label="Document viewer"></div><div id="cam" role="dialog" aria-label="Camera"></div><div id="evedge" onclick="evOpen()" role="button" aria-label="Open trip events">›</div><div id="off" style="position:fixed;left:-9999px;top:0"></div>
@@ -576,7 +663,7 @@ async function dmgSave(){const d=pday(DM.day);if(!d)return dmgX();if(!DM.kind)re
 function dmgDel(i){const d=pday(DM.day),r=(d.damages||[])[i];if(!r)return;const keep=DM;askYes("Delete the damage report from "+fHM(r.t)+"?",()=>{(r.ph||[]).forEach(id=>{PHDB.del(id).catch(()=>{});delete PHC[id]});d.damages.splice(i,1);save();DM=keep;dmgShow()},"Delete");}
 const dmgText=(r,i)=>{const o=[r.oName,r.oPhone,r.oVeh,r.oIns].filter(Boolean);return"DAMAGE REPORT "+(i+1)+" ("+fHM(r.t)+"): "+(DMK[r.kind]||"Damage")+"."+(r.where?" Where: "+r.where+(r.lat!=null&&!/^GPS/.test(r.where)?" (GPS "+(+r.lat).toFixed(5)+", "+(+r.lng).toFixed(5)+")":"")+".":"")+((r.eq||[]).length?" Equipment: "+r.eq.map(e=>eqTs(e)).join(" and ")+".":"")+" What happened: "+(r.what||"").trim()+(/[.!?]$/.test((r.what||"").trim())?"":".")+" Photos: "+(r.ph||[]).length+" (on the Damage photos page)."};
 function notesList(d){const c=calc(d),L=[d.comments];if(d.preSign){const fin=(d.events||[]).some(e=>e.type==="FINAL"||e.type==="TRUCK_OUT");L.push("EARLY SIGNATURE: "+(d.signName||"The client / foreman")+" chose to sign this timesheet"+(d.signedAt?" at "+fHM(d.signedAt):"")+", before the final load was delivered, so the driver could finish the last load without returning for a signature."+(d.preSign.est?" The driver gave an estimated clock-out time of "+fHM(d.preSign.est)+".":"")+(()=>{const k=(d.events||[]).find(e=>e.type==="FINAL"||e.type==="TRUCK_OUT");return k?" Clock-out time was recorded at "+fHM(k.t)+".":""})())}if(c.finalArr){const a=c.finalArr;L.push("Arrived at the unloading site with the last load: "+fHM(a.t)+(a.loc?", GPS "+a.loc.lat.toFixed(6)+", "+a.loc.lng.toFixed(6):""))}
- if(d.preSign){const fn=(d.events||[]).find(e=>e.type==="FINAL");if(fn)L.push("Last load delivered (actual clock-out time): "+fHM(fn.t)+(fn.loc?", GPS "+fn.loc.lat.toFixed(6)+", "+fn.loc.lng.toFixed(6)+" (±"+fn.loc.acc+" m)":", location not available"))}if(d.emergency)L.push("TRIP ENDED EARLY (equipment inoperable): "+d.emergency+". Client signature not obtained; timesheet to be sent to the office.");{const k=(d.events||[]).find(e=>e.type==="TRUCK_OUT");if(k&&k.reason)L.push("The client signed out the driver at "+fHM(k.t)+": "+k.reason)}c.loads.forEach(l=>{if(l.delay&&l.delay.startsWith("#4")&&l.dnote)L.push(`Load ${l.n} – Delay #4 Other: ${l.dnote}`);
+ if(d.finOdo)L.push("Odometer at the final delivery: "+d.finOdo.v+" (entered by the driver after the early signature, "+fHM(d.finOdo.t)+").");if(d.preSign){const fn=(d.events||[]).find(e=>e.type==="FINAL");if(fn)L.push("Last load delivered (actual clock-out time): "+fHM(fn.t)+(fn.loc?", GPS "+fn.loc.lat.toFixed(6)+", "+fn.loc.lng.toFixed(6)+" (±"+fn.loc.acc+" m)":", location not available"))}if(d.emergency)L.push("TRIP ENDED EARLY (equipment inoperable): "+d.emergency+". Client signature not obtained; timesheet to be sent to the office.");{const k=(d.events||[]).find(e=>e.type==="TRUCK_OUT");if(k&&k.reason)L.push("The client signed out the driver at "+fHM(k.t)+": "+k.reason)}c.loads.forEach(l=>{if(l.delay&&l.delay.startsWith("#4")&&l.dnote)L.push(`Load ${l.n} – Delay #4 Other: ${l.dnote}`);
  });
  c.downs.forEach(x=>L.push(`Downtime ${fHM(x.start)}–${fHM(x.end)} (${fd(x.end-x.start)}): ${x.reason}${x.note?" – "+x.note:""}`));return L.filter(Boolean)}
 const notes=d=>notesList(d).map(esc).join("<br><br>").replace(/\n/g,"<br>");
@@ -613,6 +700,14 @@ const TKO_FROM=["DEPART_YARD","ARRIVE_LOAD","LOAD_START","DEPART_LOAD","ARRIVE_U
 /* client signs before the work is finished: the driver gives an estimated arrival time at the unloading site */
 const PRE_FROM=["DEPART_YARD","ARRIVE_LOAD","LOAD_START","DEPART_LOAD","DELIVERED"];
 const earlySigned=d=>!!(d&&d.preSign&&d.sig);
+/* early signature: the odometer at the final delivery is entered before returning to the yard */
+const needFinOdo=d=>earlySigned(d)&&!d.signOdo&&(d.events||[]).some(e=>e.type==="FINAL"||e.type==="TRUCK_OUT")&&!(d.events||[]).some(e=>e.type==="RETURN_YARD");
+/* right after the final load is delivered (client signed early), a window asks for the odometer; that reading is the end odometer on the timesheet */
+function finOdoAsk(){const d=cur();if(!d||!needFinOdo(d))return;
+ dlg("Final load delivered. Enter the odometer now",{input:1,type:"number",ph:"Odometer",ok:"Save odometer",noBack:1},v=>{const d2=cur();if(!d2||!needFinOdo(d2))return;const x=odo(v);
+  if(!/^\d+(\.\d+)?$/.test(x)){toast("Enter the odometer as a number, for example 123456.");return false}
+  const keep=()=>{d2.signOdo=x;d2.finOdo={v:x,t:Date.now()};delete P.fo;save();render();toast("Odometer saved. It is on the timesheet.",1)};
+  if(!odoChk(x,d2,"fo1",()=>{if(needFinOdo(d2))keep()}))return false;keep()})}
 function nextOf(d,st){const n=NEXT[st]||[];return earlySigned(d)&&st==="ARRIVE_UNLOAD"?["FINAL"]:n}
 function preSignStart(){const d=cur();if(!d||d.sig)return;d.preSign={set:Date.now()};save();render();setTimeout(()=>{const c=$("sig");if(c)c.scrollIntoView({block:"center"})},80)}
 /* the sign-off comments are saved as they are typed, so nothing is lost when the screen redraws */
@@ -1060,7 +1155,7 @@ function todayV(){const d=cur();let h="",dock="",sheet="";
  const row=(t,ok,go,dis)=>`<div class="row2"><span>${ok?'<b class="okc">✓</b>':'<b class="wn">○</b>'} ${t}</span><button class="sec" ${dis?"disabled":""} onclick="${go};render()">${ok?"View":"Fill out"}</button></div>`;
  if(!d){const cc=clockCard();if(S.clockIn&&S.otherNow){h=cc+otherCard();dock=`<button class="big" onclick="otherEnd()">Clock out</button>`}else{h=cc+(S.clockIn?modeSeg()+(SD.mode==="other"?otherPick():startCard()):"");if(S.clockIn&&SD.mode==="other")dock=`<button class="big" onclick="otherStart()"${SD.ow&&(SD.ow!=="Other"||(SD.on||"").trim())?"":" disabled"}>Start other work</button>`;else if(S.clockIn&&S.projects.length)dock=`<button class="big" onclick="startDay()"${SD.pj&&SD.veh&&!(needTrl(SD.veh)&&!SD.trl)?"":" disabled"}>Next</button>`}}
  else{const st=stage(d),o=nextOf(d,st),c=calc(d),l=last(d),rd=ready(d)&&!preHold(d),started=d.events.some(e=>e.type==="PRETRIP"),atYard=d.events.some(e=>e.type==="RETURN_YARD"),a=activeDown(d),canDown=downOK(d,st);
- dock=(!d.sig&&(((st==="FINAL"||st==="TRUCK_OUT")&&o.includes("RETURN_YARD"))||(d.preSign&&!(st==="FINAL"||st==="TRUCK_OUT"))))?`<button class="big" onclick="sign()">Approve hours</button>`:(()=>{const g=stepGuide(d,o[0]),mg=STEP_MERGED&&o.length===1&&g;return(mg?"":g)+o.map(x=>`<button class="big stp${mg?" mrg":""} ${activeDown(d)||(x==="DEPART_YARD"&&!rd)||(x==="RETURN_YARD"&&!d.sig)||(x==="CLOCKOUT"&&!d.post?.sig)?"dim":""}" style="--sc:${STEPC[x]||"var(--hi)"}" onclick="evTap(this,event,'${x}')">${mg?g:""}<span class="bl"><svg class="sti" viewBox="0 0 24 24" aria-hidden="true">${STEPI[x]||""}</svg>${({DEPART_YARD:"Depart yard",LOAD_START:"Start loading",ARRIVE_UNLOAD:"Arrived at unloading site",DELIVERED:"Load delivered",FINAL:"Load delivered"})[x]||EV[x]}</span></button>`).join("")})();
+ dock=(!d.sig&&(((st==="FINAL"||st==="TRUCK_OUT")&&o.includes("RETURN_YARD"))||(d.preSign&&!(st==="FINAL"||st==="TRUCK_OUT"))))?`<button class="big" onclick="sign()">Approve hours</button>`:(()=>{const lc=x=>LOADC.includes(x),g="",mg=STEP_MERGED&&o.length===1&&g;return(mg?"":g)+o.map(x=>`<button class="big${lc(x)?" stp":""}${mg?" mrg":""} ${activeDown(d)||(x==="DEPART_YARD"&&!rd)||(x==="RETURN_YARD"&&!d.sig)||(x==="CLOCKOUT"&&!d.post?.sig)?"dim":""}" ${lc(x)?`style="--sc:${STEPC[x]}"`:""} onclick="evTap(this,event,'${x}')">${mg?g:""}<span class="bl">${lc(x)?`<svg class="sti" viewBox="0 0 24 24" aria-hidden="true">${STEPI[x]||""}</svg>`:""}${({DEPART_YARD:"Depart yard",LOAD_START:"Start loading",ARRIVE_UNLOAD:"Arrived at unloading site",DELIVERED:"Load delivered",FINAL:"Load delivered"})[x]||EV[x]}</span></button>`).join("")})();
  const hint=o.includes("DEPART_YARD")&&!rd?(preHold(d)?"":""):o.includes("RETURN_YARD")&&!d.sig?"":o.includes("CLOCKOUT")&&!d.post?.sig?"Sign the post-trip report (Inspections menu) to unlock Clock out.":"";
  const edl=["DEPART_LOAD","ARRIVE_UNLOAD"].includes(st),pick0=o.includes("LOAD_START")||o.includes("DEPART_LOAD"),needStep=pick0||edl,stepLbl=pick0||edl?"Load details":o.includes("POSTTRIP")?"Post-trip setup":"Details",odo0=o.includes("PRETRIP")?`<div class="card"><label style="margin-top:0">Odometer reading (required to start the pre-trip)</label><input id="so0" inputmode="decimal" placeholder="Enter the odometer" value="${esc(P.so0||"")}" oninput="P.so0=this.value"></div>`:"";
  const clk=o.includes("CLOCKOUT")?`<div class="card"><label style="margin-top:0">Odometer reading after post-trip (optional)${d.signOdo?" · sign-off reading was "+esc(d.signOdo):""}</label><input id="eo3" inputmode="decimal" placeholder="Leave empty to skip" value="${esc(P.eo3||"")}" oninput="P.eo3=this.value"><label>Clock-out notes (optional)</label><textarea id="cn" rows="3" oninput="P.cn=this.value" placeholder="Anything to report about the day">${esc(P.cn||"")}</textarea></div>`:"";
@@ -1081,7 +1176,7 @@ function todayV(){const d=cur();let h="",dock="",sheet="";
  const qb=(k,t,go,off,why)=>`<button class="qb${PANEL===k?" on":""}${off?" off":""}" onclick="${off?`toast('${why}')`:(go||`openP('${k}')`)}" aria-label="${t}"><svg viewBox="0 0 24 24" aria-hidden="true">${QI[k]}</svg><span>${t}</span></button>`;
  const dvirSlot=!d.events.some(e=>e.type==="ARRIVE_LOAD")||!!d.sig;
  const qrow=`<div class="qrow">${dvirSlot?qb("insp","DVIR"):qb("step",!needStep?"Load":stepLbl==="Load details"?"Load":stepLbl==="Post-trip setup"?"Post-trip":"Details","",!needStep,"Load details open once you arrive at the loading site.")}${qb("out","Clock out","closeP();truckOut()",!TKO_FROM.includes(st),"Clock out is available after you leave the yard.")}${qb("ts","Timesheet",`pvOpen('ts','${d.id}')`)}${qb("more","More")}</div>`;
- const tdHL=(()=>{const LL=calc(d).loads,lz=LL[LL.length-1],lab={ARRIVE_LOAD:" ",LOAD_START:" ",DEPART_LOAD:"Hauling now",ARRIVE_UNLOAD:"Hauling now",DELIVERED:"Last load",FINAL:"Last load"}[st],le=lz&&lab?{mat:lz.mat,loadLoc:lz.loadLoc,unlLoc:lz.unlLoc,lab}:null;return le?`<div class="haul2">${le.lab.trim()?`<small>${le.lab}</small>`:""}<b>${esc(le.mat||"Material not set")}</b><span>${esc(le.loadLoc||"")} → ${esc(le.unlLoc||"")}</span></div>`:""})(),tdTB=`${d.events.some(e=>e.type==="DEPART_YARD")?(()=>{const l=last(d),can=l&&!d.events.some(e=>e.type==="CLOCKOUT")&&(!d.sig||(d.preSign&&d.signedAt&&l.t>d.signedAt));return can?`<div class="card ckbar"><div class="ckb1">${locBadge()}</div><button class="sec ckundo" aria-label="Undo last event" title="Undo last event" onclick="undo()">${UNDOI}</button></div>`:`<div class="card ckbar"><div class="ckb1">${locBadge()}</div></div>`})():`<div class="card ckbar"><div class="ckb1">${locBadge()}</div><button class="sec ckundo" aria-label="Go back" title="Go back to project and equipment" onclick="backToStart()">${UNDOI}</button></div>`}`,tdRS=`${d.events.some(e=>e.type==="ARRIVE_LOAD")?`<div class="cnt">${c.count} <span style="font-size:16px" class="mut">load${c.count==1?"":"s"} hauled today</span></div>`:""}${tdHL}${hint?`<p class="warn" style="margin:8px 0 0">${hint}</p>`:""}${o.includes("DEPART_YARD")&&preHold(d)?holdCard(d):""}${a?`<div class="dbn"><span><b>Downtime in progress</b><br>${esc(a.reason)} · since ${fHM(a.start)}</span><button onclick="endDown()">End downtime</button></div>`:""}`;h=tdTB.replace(/<\/div>$/,qrow+"</div>")+(tdRS.trim()?`<div class="card">${tdRS}</div>`:"")+`
+ const tdHL=(()=>{const LL=calc(d).loads,lz=LL[LL.length-1],lab={ARRIVE_LOAD:" ",LOAD_START:" ",DEPART_LOAD:"Hauling now",ARRIVE_UNLOAD:"Hauling now",DELIVERED:"Last load",FINAL:"Last load"}[st],le=lz&&lab?{mat:lz.mat,loadLoc:lz.loadLoc,unlLoc:lz.unlLoc,lab}:null;const ln="";/* truck and step dots removed from this card (truckLane / stepGuide kept in case they come back) */return le?`<div class="haul2">${ln||(le.lab.trim()?`<small>${le.lab}</small>`:"")}<b>${esc(le.mat||"Material not set")}</b><span>${esc(le.loadLoc||"")} → ${esc(le.unlLoc||"")}</span></div>`:ln?`<div class="haul2" style="border-top:0;margin-top:0;padding-top:0">${ln}</div>`:""})(),tdTB=`${d.events.some(e=>e.type==="DEPART_YARD")?(()=>{const l=last(d),can=l&&!d.events.some(e=>e.type==="CLOCKOUT")&&(!d.sig||(d.preSign&&d.signedAt&&l.t>d.signedAt));return can?`<div class="card ckbar"><div class="ckb1">${locBadge()}</div><button class="sec ckundo" aria-label="Undo last event" title="Undo last event" onclick="undo()">${UNDOI}</button></div>`:`<div class="card ckbar"><div class="ckb1">${locBadge()}</div></div>`})():`<div class="card ckbar"><div class="ckb1">${locBadge()}</div><button class="sec ckundo" aria-label="Go back" title="Go back to project and equipment" onclick="backToStart()">${UNDOI}</button></div>`}`,tdRS=`${d.events.some(e=>e.type==="ARRIVE_LOAD")?`<div class="cnt">${c.count} <span style="font-size:16px" class="mut">load${c.count==1?"":"s"} hauled today</span></div>`:""}${tdHL}${hint?`<p class="warn" style="margin:8px 0 0">${hint}</p>`:""}${o.includes("DEPART_YARD")&&preHold(d)?holdCard(d):""}${a?`<div class="dbn"><span><b>Downtime in progress</b><br>${esc(a.reason)} · since ${fHM(a.start)}</span><button onclick="endDown()">End downtime</button></div>`:""}`;h=tdTB.replace(/<\/div>$/,qrow+"</div>")+(tdRS.trim()?`<div class="card">${tdRS}</div>`:"")+`
  ${odo0}${preCard}${clk}${tix}`;
  if(PANEL&&T_[PANEL])sheet=`<div class="shbg" onclick="closeP()"><div class="shbox sh_${PANEL}" onclick="event.stopPropagation()"><div class="shhead"><b style="font-size:18px">${T_[PANEL][0]}</b><button class="sec ico sm" aria-label="Close" title="Close" onclick="closeP()">${XI}</button></div>${T_[PANEL][1]}</div></div>`;
  const early=!!d.preSign&&!(st==="FINAL"||st==="TRUCK_OUT");
@@ -1089,9 +1184,20 @@ function todayV(){const d=cur();let h="",dock="",sheet="";
  if(!d.sig&&((c.out&&(st==="FINAL"||st==="TRUCK_OUT"))||early))h=`<div class="card ckbar"><button class="sec tsbar" onclick="pvOpen('ts','${d.id}')">${DOCI}<span>View timesheet</span></button><button class="sec ckundo" aria-label="${early?"Cancel early signature":"Undo last event"}" title="${early?"Cancel early signature":"Undo last event"}" onclick="${early?"preSignCancel()":"undo()"}">${UNDOI}</button></div>`;
  if(!d.sig&&((c.out&&(st==="FINAL"||st==="TRUCK_OUT"))||d.preSign))h+=`<div class="card"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px"><h2 style="margin:0">Client sign-off</h2></div>${early?`<p class="mut" style="margin:0 0 4px">After the client signs, only one more load can be recorded.</p>`:`<label style="margin-top:0">Odometer now <span class="req">*</span></label><input id="eo" inputmode="decimal" value="${esc(P.seo||"")}" oninput="P.seo=this.value;clearTimeout(window.__eoT);window.__eoT=setTimeout(()=>{document.querySelectorAll('[data-prev^=&quot;ts:&quot;]').length&&loadPreviews()},700)">`}<label>Comments <span class="mut" style="font-weight:500">(optional)</span></label><textarea id="cm" rows="2" oninput="cmSave(this.value)">${esc(d.comments||"")}</textarea>
  <label>Client / foreman name <span class="req">*</span></label><input id="nm" placeholder="Full name" value="${esc(P.snm||"")}" oninput="P.snm=this.value"><label>Client / foreman signature <span class="req">*</span></label><div class="sgw"><canvas class="sg" id="sig"></canvas><button type="button" class="sgclr" aria-label="Clear signature" title="Clear" onclick="padClr('sig')">${ERASEI}<span>Clear</span></button></div></div>`;
- else if(d.sig&&(st==="FINAL"||st==="TRUCK_OUT"))h+=`<div class="card"><h2>Hours approved ✓</h2><p>Signed by ${esc(d.signName)}. You can now return to the yard.</p></div>`}
+ else if(d.sig&&(st==="FINAL"||st==="TRUCK_OUT"))h+=(needFinOdo(d)?`<div class="card"><label style="margin-top:0">Odometer reading (required to return to the yard)</label><input id="fo" inputmode="decimal" placeholder="Enter the odometer" value="${esc(P.fo||"")}" oninput="P.fo=this.value"></div>`:"")+`<div class="card"><h2>Hours approved ✓</h2><p>Signed by ${esc(d.signName)}. You can now return to the yard.</p></div>`}
  $("app").innerHTML=h;{const k=(dock||"").replace(/<[^>]+>/g,"");$("dock").innerHTML=dock;if(k&&k!==DOCKK){DOCKLOCK=DOCKK?Date.now()+700:0;$("dock").querySelectorAll(".big").forEach(b=>{b.classList.add("enter");if(DOCKLOCK){b.classList.add("arm");setTimeout(()=>b.classList.remove("arm"),700)}})}DOCKK=k}$("sheet").innerHTML=sheet;$("app").className=dock?"hasdock":"";pads={};pad("sig")}
-function render(){renderSafe();try{loadThumbs()}catch(e){}try{evEdge()}catch(e){}}
+function render(){renderSafe();try{loadThumbs()}catch(e){}try{evEdge()}catch(e){}try{pill(document.querySelector("nav"),"nav");document.querySelectorAll(".segs").forEach(b=>pill(b,b.classList.contains("mode")?"mode":"segs"))}catch(e){}}
+/* tab bars: a highlight slides to the chosen button and its icon bounces */
+const PILL={};
+function iconFx(b){const a=b.dataset.a,sv=b.querySelector("svg");if(!sv)return;sv.querySelectorAll(".fx").forEach(e=>e.remove());const add=h=>sv.insertAdjacentHTML("beforeend",h);
+ if(a==="t_today"||a==="equipment")add('<g class="fx fxspd"><path d="M-2 9.5h3.5"/><path d="M-3.5 12.5h4"/><path d="M-2 15.5h3"/></g><g class="fx fxdust"><circle cx="2.5" cy="18.5" r="1.1"/><circle cx="0.5" cy="17.5" r=".8"/></g>');
+ if(a==="t_fuel")add('<rect class="fx fxfill" x="5.8" y="4.3" width="7.4" height="15.4" rx=".6"/><circle class="fx fxdrop" cx="18.5" cy="7.2" r="1"/><circle class="fx fxdrop d2" cx="18.5" cy="7.2" r="1"/><circle class="fx fxdrop d3" cx="18.5" cy="7.2" r="1"/>');
+ if(a==="materials")add('<g class="fx fxdirt"><circle cx="13" cy="1" r="1.1"/><circle cx="15.5" cy="-1" r=".9"/><circle cx="11" cy="-2" r="1"/><circle cx="14" cy="-4" r=".8"/></g>');
+ if(a==="projects")add('<path class="fx fxchk" d="M14.5 17.5l1.6 1.6 3.4-3.6"/>');
+ setTimeout(()=>sv.querySelectorAll(".fx").forEach(e=>e.remove()),2000)}
+function pill(box,key){if(!box)return;box.classList.add("haspill");let p=box.querySelector(":scope>.pill");if(!p){p=document.createElement("i");p.className="pill";box.prepend(p)}const on=box.querySelector(":scope>.on");if(!on||!on.offsetWidth){p.style.opacity=0;return}
+ const r={l:on.offsetLeft,t:on.offsetTop,w:on.offsetWidth,h:on.offsetHeight},o=PILL[key],set=x=>{p.style.transform=`translate(${x.l}px,${x.t}px)`;p.style.width=x.w+"px";p.style.height=x.h+"px"};p.style.opacity=1;
+ const moved=o&&(o.l!==r.l||o.w!==r.w)&&o.w;p.style.transition="none";set(moved?o:r);void p.offsetWidth;p.style.transition="";if(moved){set(r);on.dataset.a=(on.id||on.textContent.trim().split(/\s+/)[0]).toLowerCase();on.classList.remove("pop");void on.offsetWidth;on.classList.add("pop");try{iconFx(on)}catch(e){}setTimeout(()=>on.classList.remove("pop"),1900);p.classList.remove("land");setTimeout(()=>{p.classList.add("land");setTimeout(()=>p.classList.remove("land"),600)},300)}PILL[key]=r}
 function renderSafe(){try{renderCore()}catch(e){console.error(e);S.form=null;S.view=null;PANEL=null;S.tab="today";try{renderCore()}catch(e2){$("app").className="";$("dock").innerHTML="";$("sheet").innerHTML="";$("app").innerHTML='<div class="card"><h2>Something went wrong</h2><p class="mut">'+esc(e2&&e2.message||e2)+'</p><button onclick="location.reload()">Reload the app</button></div>'}}}
 function openP(k){PANEL=k;render()}
 function closeP(){PANEL=null;render()}
@@ -1130,16 +1236,18 @@ function evTap(b,e,x){if(b.dataset.busy)return;if(Date.now()<DOCKLOCK){btnShake(
 function btnShake(b){b.classList.remove("shk");void b.offsetWidth;b.classList.add("shk");try{navigator.vibrate&&navigator.vibrate([30,40,30])}catch(_){}}
 /* a step button that has just appeared can't be tapped for a moment, so a double tap can't record two steps */
 let DOCKLOCK=0;
+/* only the driving steps (the load cycle) get the colored button with the step guide and truck; the yard and end-of-day steps are plain buttons */
+const LOADC=["ARRIVE_LOAD","LOAD_START","DEPART_LOAD","ARRIVE_UNLOAD","DELIVERED","FINAL"];
 /* EXPERIMENT: the step guide (with the truck) sits inside the step button. false = guide above the button */
 const STEP_MERGED=true;
 /* each step has its own color and icon, and the step guide above the buttons shows where you are */
-const STEPC={PRETRIP:"#5b8def",DEPART_YARD:"#14b8a6",ARRIVE_LOAD:"#f5a524",LOAD_START:"#f59e0b",DEPART_LOAD:"#ea7a12",ARRIVE_UNLOAD:"#3b82f6",DELIVERED:"#22c55e",FINAL:"#22c55e",RETURN_YARD:"#0ea5a0",POSTTRIP:"#8b5cf6",CLOCKOUT:"#e5484d"};
+const STEPC={PRETRIP:"#64748b",DEPART_YARD:"#0d9488",ARRIVE_LOAD:"#f59e0b",LOAD_START:"#8b5a2b",DEPART_LOAD:"#db2777",ARRIVE_UNLOAD:"#2563eb",DELIVERED:"#16a34a",FINAL:"#16a34a",RETURN_YARD:"#0d9488",POSTTRIP:"#7c3aed",CLOCKOUT:"#dc2626"};
 const STEPI={PRETRIP:'<path d="M9 4h6v3H9z"/><path d="M15 5.5h3.5V21h-13V5.5H9"/><path d="M9 13l2 2 4-4"/>',DEPART_YARD:'<path d="M3 21V9l9-5 9 5v12"/><path d="M12 13h7M16 10l3 3-3 3"/>',ARRIVE_LOAD:'<path d="M12 21.5s6.5-5.8 6.5-11.2a6.5 6.5 0 1 0-13 0c0 5.4 6.5 11.2 6.5 11.2z"/><circle cx="12" cy="10.2" r="2.4"/>',LOAD_START:'<path d="M12 3v11M7.5 9.5L12 14l4.5-4.5"/><path d="M3 17h18l-2 4H5z"/>',DEPART_LOAD:'<path d="M2 16V7h11v9"/><path d="M13 10h4l3 3v3h-7"/><circle cx="6" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/>',ARRIVE_UNLOAD:'<path d="M12 21.5s6.5-5.8 6.5-11.2a6.5 6.5 0 1 0-13 0c0 5.4 6.5 11.2 6.5 11.2z"/><path d="M9.3 10.2l2 2 3.5-3.5"/>',DELIVERED:'<path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M8 12l3 3 5-5"/>',RETURN_YARD:'<path d="M3 21V9l9-5 9 5v12"/><path d="M19 13h-7M15 10l-3 3 3 3"/>',POSTTRIP:'<path d="M9 4h6v3H9z"/><path d="M15 5.5h3.5V21h-13V5.5H9"/><path d="M9 13l2 2 4-4"/>',CLOCKOUT:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'};
 STEPI.FINAL=STEPI.DELIVERED;
 const PHASES=[["At the yard",["PRETRIP","DEPART_YARD"]],["Load cycle",["ARRIVE_LOAD","LOAD_START","DEPART_LOAD","ARRIVE_UNLOAD","DELIVERED"]],["End of day",["RETURN_YARD","POSTTRIP","CLOCKOUT"]]];
 const STEPS={PRETRIP:"Pre-trip",DEPART_YARD:"Leave yard",ARRIVE_LOAD:"At loading",LOAD_START:"Loading",DEPART_LOAD:"Hauling",ARRIVE_UNLOAD:"At unloading",DELIVERED:"Delivered",FINAL:"Delivered",RETURN_YARD:"Back at yard",POSTTRIP:"Post-trip",CLOCKOUT:"Clock out"};
 /* the mini truck rides along the step guide: where it is (f = 0 first step .. 1 last step) and what it is doing */
-const TKPOS={PRETRIP:[0,"park"],DEPART_YARD:[0,"idle"],ARRIVE_LOAD:[0,"drive"],LOAD_START:[0,"idle"],DEPART_LOAD:[.25,"load"],ARRIVE_UNLOAD:[.625,"haul"],DELIVERED:[.75,"dump"],FINAL:[.75,"dump"],RETURN_YARD:[0,"drive"],POSTTRIP:[0,"park"],CLOCKOUT:[.5,"park"]};
+const TKPOS={PRETRIP:[0,"park"],DEPART_YARD:[0,"idle"],ARRIVE_LOAD:[0,"drive"],LOAD_START:[0,"idle"],DEPART_LOAD:[.25,"load"],ARRIVE_UNLOAD:[.5,"haul"],DELIVERED:[.75,"dump"],FINAL:[.75,"dump"],RETURN_YARD:[0,"drive"],POSTTRIP:[0,"park"],CLOCKOUT:[.5,"park"]};
 let TKLAST=null;
 /* the mini rig is built from the day's equipment: dump truck (+ pup) or tractor (bobtail, one or two trailers: side dump, belly dump, end dump, other), in the equipment's own color */
 const RIGCOL={red:"#d93025",maroon:"#8b1e2a",burgundy:"#8b1e2a",blue:"#2f6fdf",navy:"#1f3a7a",green:"#2e9b4f",white:"#f4f6f6",black:"#2a2f30",gray:"#8e9a9a",grey:"#8e9a9a",silver:"#c9d1d1",chrome:"#d5dbdb",aluminum:"#c9d1d1",yellow:"#f4c430",orange:"#f5a524",brown:"#7a5230",tan:"#c9a46b",beige:"#d8c49a",purple:"#7c4dcc",gold:"#d4a017",teal:"#14a39a"};
@@ -1160,16 +1268,19 @@ function miniTruck(mode,d){const pu=vType(d&&d.vehicle)||{type:"dump"},trs=[d&&d
  let x=0;const pos=[0];for(let j=1;j<units.length;j++){const u=units[j],prev=units[j-1];x=prev.kind==="tractor"?x-u.w+13:prev.kind==="truck"?x-u.w+1:x-u.w+4;pos.push(x)}
  const minX=Math.min(...pos),W=Math.max(...units.map((u,j)=>pos[j]+u.w))-minX;
  return{w:W,svg:`<svg viewBox="0 -8 ${W} 42" aria-hidden="true"><g class="mtbody">${units.map((u,j)=>`<g class="u-${u.kind}" transform="translate(${pos[j]-minX} 0)">${u.svg}</g>`).reverse().join("")}</g></svg>`}}
+/* the truck on its road, shown in the "loads hauled today" card during the load cycle (in place of the "Hauling now" label) */
+function truckLane(d,next){if(!LOADC.includes(next))return"";const n=calc(d).loads.length+(next==="ARRIVE_LOAD"?1:0),[f,mode]=TKPOS[next]||[0,"idle"],key=next+"|"+n;let mv="",f0=f;
+ if(TKLAST&&TKLAST.key!==key){if(TKLAST.f<f){mv=" mv";f0=TKLAST.f}else if(TKLAST.f>f){mv=" mvin";f0=-.25}else if(TKLAST.mode==="drive"&&mode!=="drive")mv=" brk"}
+ TKLAST={key,f,mode};const r=miniTruck(mode,d);
+ return`<div class="stln tkcard"><div class="strd${mode==="drive"||mode==="haul"?" go":""}"></div><div class="mtk m-${mode}${mv}" style="--f:${f};--f0:${f0};--w:${(r.w*44/42).toFixed(1)}px">${r.svg}</div></div>`}
 function stepGuide(d,next){if(!next)return"";const k=next==="FINAL"?"DELIVERED":next,ph=PHASES.find(p=>p[1].includes(k));if(!ph)return"";const i=ph[1].indexOf(k),n=calc(d).loads.length+(k==="ARRIVE_LOAD"?1:0);
- const [f,mode]=TKPOS[next]||[0,"idle"],key=ph[0]+"|"+next+"|"+n;let mv="",f0=f;
- if(TKLAST&&TKLAST.key!==key){if(TKLAST.ph===ph[0]&&TKLAST.f<f){mv=" mv";f0=TKLAST.f}else if(TKLAST.ph===ph[0]&&TKLAST.f>f||TKLAST.ph!==ph[0]){mv=" mvin";f0=-.25}else if(TKLAST.mode==="drive"&&mode!=="drive")mv=" brk"}
- TKLAST={key,f,mode,ph:ph[0]};
- return`<div class="stg" style="--sc:${STEPC[next]}"><div class="stgh"><b>${ph[0]}${ph[0]==="Load cycle"&&n?" · load "+n:""}</b><span>Step ${i+1} of ${ph[1].length}</span></div><div class="stln"><div class="strd${mode==="drive"||mode==="haul"?" go":""}"></div>${(()=>{const r=miniTruck(mode,d);return`<div class="mtk m-${mode}${mv}" style="--f:${f};--f0:${f0};--w:${(r.w*38/42).toFixed(1)}px">${r.svg}</div>`})()}</div><div class="stgr">${ph[1].map((s,j)=>`<span class="sts${j<i?" dn":j===i?" nw":""}" style="--c:${STEPC[s]}"><i>${j<i?CKI:`<svg viewBox="0 0 24 24" aria-hidden="true">${STEPI[s]}</svg>`}</i><small>${STEPS[s]}</small></span>`).join('<b class="stl"></b>')}</div></div>`}
+ return`<div class="stg" style="--sc:${STEPC[next]}"><div class="stgr">${ph[1].map((s,j)=>`<span class="sts${j<i?" dn":j===i?" nw":""}" style="--c:${STEPC[s]}"><i>${j<i?CKI:`<svg viewBox="0 0 24 24" aria-hidden="true">${STEPI[s]}</svg>`}</i><small>${STEPS[s]}</small></span>`).join('<b class="stl"></b>')}</div></div>`}
 function ev(t,quiet){const d=cur(),st=stage(d);if(!nextOf(d,st).includes(t))return toast("Out of sequence.");const l=last(d);if(l&&Date.now()-l.t<700)return toast("Wait a second, then tap again.");
  if(activeDown(d))return toast("End the downtime before continuing.");
  if(t==="DEPART_YARD"&&preHold(d))return toast("Pre-trip defects are not cleared. Send the pre-trip report to the office and wait for instructions before starting your trip.");
  if(t==="DEPART_YARD"&&!ready(d))return toast("Sign the pre-trip report and the fitness checklist first.");
  if(t==="RETURN_YARD"&&!d.sig)return toast("Get the client's signature on the hours before returning to the yard.");
+ if(t==="RETURN_YARD"&&needFinOdo(d)){const v=odo(P.fo);if(!/^\d+(\.\d+)?$/.test(v))return(toast("Enter the odometer reading before returning to the yard."),$("fo")&&$("fo").focus());if(!odoChk(v,d,"fo1",()=>ev("RETURN_YARD")))return;d.signOdo=v;d.finOdo={v,t:Date.now()};delete P.fo;delete P.fo1}
  if(t==="CLOCKOUT"&&!d.post?.sig)return toast("Sign the post-trip report before clocking out.");
  const e={type:t,t:Date.now()};
  if(t==="PRETRIP"){const v=odo(P.so0);if(!/^\d+(\.\d+)?$/.test(v))return(toast("Enter the odometer reading before starting the pre-trip."),$("so0")&&$("so0").focus());d.startOdo=v}
@@ -1293,7 +1404,7 @@ const vpIds=vpList;
 /* TESTING ONLY: "Add 4 test photos" button in pre-trip and post-trip. Set TEST_PHOTOS=false (or remove this block) before real use. */
 const TEST_PHOTOS=false;
 /* TESTING ONLY: "Add 4 test photos" button in the pre-trip and post-trip. Set TEST_PRE=false before real use. */
-const TEST_PRE=true;
+const TEST_PRE=false;
 async function vpTest(id,kd){const sides=["Front","Driver side","Rear","Passenger side"],fx=await getFix(),cols=["#4a6b8a","#6b8a4a","#8a6b4a","#6b4a8a"];
  for(let i=0;i<4;i++){const c=document.createElement("canvas");c.width=1280;c.height=960;const x=c.getContext("2d");x.fillStyle=cols[i];x.fillRect(0,0,1280,960);
   x.fillStyle="rgba(255,255,255,.18)";x.fillRect(240,330,560,260);x.fillRect(800,400,240,190);x.beginPath();x.arc(390,620,70,0,7);x.arc(900,620,70,0,7);x.fill();
@@ -1692,8 +1803,12 @@ function vehSave(){vehGrab();const cap1=v=>(v||"").trim().replace(/^./,c=>c.toUp
  f.cap=f.cap.replace(/\s*tons?\s*$/i,"");if(f.cap)f.cap+=" ton";
  const n=vJoin(f),k=VT[T].k,ed=VD.i>=0,ok=VD.k||k;
  if(S[k].some((v,j)=>v===n&&!(ed&&k===ok&&j===VD.i)))return toast("That one is already in the list.");
- S.vinfo=S.vinfo||{};if(ed){const old=S[ok][VD.i];delete S.vinfo[old];S[ok][VD.i]=n}else S[k].push(n);S.vinfo[n]=f;
+ S.vinfo=S.vinfo||{};if(ed){const old=S[ok][VD.i];S[ok][VD.i]=n;if(old!==n)vRename(old,n)}else S[k].push(n);S.vinfo[n]=f;
  VD=null;PM=null;save();render();toast(ed?"Equipment saved.":"Equipment added.",1)}
+/* an edited piece of equipment gets a new name (it includes the color and plate). The old details are kept so finished Trip Records still read right, and the trip in progress, the last-used choice and the start-of-day picks move to the new name */
+function vRename(old,n){const sw=v=>v===old?n:v,swl=t=>t?String(t).split(" + ").map(sw).join(" + "):t;
+ S.days.filter(d=>d.status==="open").forEach(d=>{["vehicle","trailer","trailer2"].forEach(x=>{d[x]=sw(d[x])});if(d.post){d.post.veh=sw(d.post.veh);d.post.trl=swl(d.post.trl)}});
+ if(S.lastEq)["veh","trl","trl2"].forEach(x=>{S.lastEq[x]=sw(S.lastEq[x])});["veh","trl","trl2"].forEach(x=>{if(SD[x]!==undefined)SD[x]=sw(SD[x]);if(UC&&UC[x]!==undefined)UC[x]=sw(UC[x])});if(P.pv)P.pv=sw(P.pv);if(P.pt)P.pt=swl(P.pt);if(S.preStash){S.preStash.veh=sw(S.preStash.veh);S.preStash.trl=sw(S.preStash.trl)}}
 function vehDel(){if(!VD)return;const k=VD.k,i=VD.i,nm=vParts(S[k][i],k).name;askYes("Delete "+nm+"?",()=>vehRm(k,i),"Delete")}
 function vehRm(k,i){if(S.vinfo)delete S.vinfo[S[k][i]];S[k].splice(i,1);VD=null;PM=null;save();render();toast("Removed.",1)}
 /* projects: most recently added or edited first */
